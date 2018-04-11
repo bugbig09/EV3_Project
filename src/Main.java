@@ -8,7 +8,7 @@ import lejos.hardware.Brick;
  //Löschen vorheriger Anzeigen auf dem LCD
  LCD.clear();
  //Ausgeben des Strings auf de, LCD in Spalte 0 und Zeile 5
- LCD.drawString("Hallo Welt", 0, 5);
+ LCD.drawString("Hallo", 0, 5);
  //Warten, bis irgendeine Taste gedrückt wird
  Button.waitForAnyPress();
  //Löschen und Aktualisieren der Anzeige,

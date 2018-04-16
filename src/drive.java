@@ -1,10 +1,7 @@
 
 public class drive {
 
-byte 
-
-
-void ride() {
+void ride(byte speed, byte direction) {
 	
 }
 }

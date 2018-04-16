@@ -4,6 +4,7 @@ import lejos.robotics.RegulatedMotor;
 public class drive {
 	/*
 	 * Einbinden der Extras Klasse
+	 * Definieren der Motoren
 	 */
 	extras extras = new extras();
 

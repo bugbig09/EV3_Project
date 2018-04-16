@@ -34,7 +34,7 @@ void ride(byte speed, byte direction, byte rotation) {
 	long scaledRotation;
 
 	scaledSpeed = extras.scale(100, 0, 500, 0, speed);
-	scaledRotation = extras.scale(90, -90, out_Max, out_Min, input)
+	scaledRotation = extras.scale(90, -90, 100, 0, rotation);
 	
 	switch (direction) {
 	case -1:

@@ -6,11 +6,11 @@ import lejos.utility.*;
 	 static drive fahren = new drive();
 
 public static void main (String args[]){
-	fahren.ride(100, 1, 50);
+	fahren.ride(100, 1, 0);
 	Delay.msDelay(2000);
-	fahren.ride(100, 1, 20);
+	fahren.ride(100, 1, -90);
 	Delay.msDelay(2000);
-	fahren.ride(100, 1, 80);
+	fahren.ride(100, 1, 90);
 	Delay.msDelay(2000);
 	
  }

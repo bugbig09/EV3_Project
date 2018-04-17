@@ -20,7 +20,7 @@ public class drive {
 	int scaledSpeed;
 	int scaledRotation;
 	
-void ride(int speed, int direction, int rotation) {
+void ride(float speed, float direction, float rotation) {
 
 	/**
  * Direction ist für die Fahrrichtung.
@@ -42,15 +42,15 @@ void ride(int speed, int direction, int rotation) {
 	 */
 	
 	scaledSpeed = (int) extras.scale(100, 0, MaxSpeed, 0, speed);
-	scaledRotation = rotation; /*(int) extras.scale(90, -90, 100, 0, rotation);*/
+	scaledRotation = (int) extras.scale(90, -90, 100, 0, rotation);
 	
-	switch (direction) {
+	switch ((int)direction) {
 	case -1:
 		
 		break;
 		
 	case 1:
-		SpeedOutA = (scaledSpeed*scaledRotation/100);
+		SpeedOutA = ((scaledSpeed*scaledRotation)/100);
 		SpeedOutB = (scaledSpeed - SpeedOutA);
 		LCD.drawString("SpeedA", 0, 0);
 		LCD.drawInt(SpeedOutA, 0, 1);

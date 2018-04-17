@@ -1,3 +1,4 @@
+import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
 import lejos.robotics.RegulatedMotor;
@@ -8,7 +9,7 @@ public class drive {
 	 * Definieren der Motoren
 	 * Variablen definition
 	 */
-	extras extras = new extras();
+	static extras extras = new extras();
 
 	RegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
 	RegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.B);
@@ -19,7 +20,7 @@ public class drive {
 	int scaledSpeed;
 	int scaledRotation;
 	
-void ride(byte speed, byte direction, byte rotation) {
+void ride(int speed, int direction, int rotation) {
 
 	/**
  * Direction ist für die Fahrrichtung.
@@ -39,9 +40,9 @@ void ride(byte speed, byte direction, byte rotation) {
 	/* 
 	 * Werte in die Bereiche skalieren
 	 */
-
+	
 	scaledSpeed = (int) extras.scale(100, 0, MaxSpeed, 0, speed);
-	scaledRotation = (int) extras.scale(90, -90, 100, 0, rotation);
+	scaledRotation = rotation; /*(int) extras.scale(90, -90, 100, 0, rotation);*/
 	
 	switch (direction) {
 	case -1:
@@ -49,8 +50,15 @@ void ride(byte speed, byte direction, byte rotation) {
 		break;
 		
 	case 1:
-		SpeedOutA = (scaledSpeed*scaledRotation)/100;
-		SpeedOutB = scaledSpeed - SpeedOutA;
+		SpeedOutA = (scaledSpeed*scaledRotation/100);
+		SpeedOutB = (scaledSpeed - SpeedOutA);
+		LCD.drawString("SpeedA", 0, 0);
+		LCD.drawInt(SpeedOutA, 0, 1);
+		LCD.drawString("SpeedB", 0, 2);
+		LCD.drawInt(SpeedOutB, 0, 3);
+		LCD.drawInt(scaledSpeed, 0, 4);
+		LCD.drawInt(scaledRotation, 0, 5);
+		
 		
 		motorA.setSpeed(SpeedOutA);
 		motorB.setSpeed(SpeedOutB);

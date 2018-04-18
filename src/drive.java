@@ -50,7 +50,7 @@ void ride(float speed, float direction, float rotation) {
 		break;
 		
 	case 1:
-		SpeedOutA = ((scaledSpeed*scaledRotation)/100);
+		/*SpeedOutA = ((scaledSpeed*scaledRotation)/100);
 		SpeedOutB = (scaledSpeed - SpeedOutA);
 		LCD.drawString("SpeedA", 0, 0);
 		LCD.drawInt(SpeedOutA, 0, 1);
@@ -61,9 +61,40 @@ void ride(float speed, float direction, float rotation) {
 		
 		
 		motorA.setSpeed(SpeedOutA);
-		motorB.setSpeed(SpeedOutB);
-		motorA.forward();
-		motorB.forward();
+		motorB.setSpeed(SpeedOutB);*/
+		
+		if (rotation <0) {
+			SpeedOutA = (scaledSpeed-((scaledSpeed*scaledRotation)/100));
+			SpeedOutB = ((scaledSpeed*scaledRotation)/100);
+			
+			motorA.setSpeed(SpeedOutA);
+			motorB.setSpeed(SpeedOutB);
+			
+			motorA.backward();
+			motorB.forward();
+		}
+		
+		else if (rotation>0) {
+			SpeedOutA = ((scaledSpeed*scaledRotation)/100);
+			SpeedOutB = (SpeedOutA);
+			
+			motorA.setSpeed(SpeedOutA);
+			motorB.setSpeed(SpeedOutB);
+			
+			motorA.forward();
+			motorB.backward();
+		}
+		
+		else {
+			SpeedOutB = ((scaledSpeed*scaledRotation)/100);
+			SpeedOutA = ((scaledSpeed*scaledRotation)/100);
+			
+			motorA.setSpeed(SpeedOutA);
+			motorB.setSpeed(SpeedOutB);
+
+			motorA.forward();
+			motorB.forward();
+		}
 		
 		break;
 

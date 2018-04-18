@@ -1,4 +1,3 @@
-import lejos.hardware.Brick;
 import lejos.utility.*;
 
  public class Main {
@@ -8,11 +7,10 @@ import lejos.utility.*;
 public static void main (String args[]){
 	fahren.ride(100, 1, 0);
 	Delay.msDelay(2000);
-	fahren.ride(100, 1, -90);
-	Delay.msDelay(2000);
-	fahren.ride(100, 1, 90);
-	Delay.msDelay(2000);
+	fahren.ride(100, 1, -10);
+	Delay.msDelay(5000);
+	fahren.ride(100, 1, 5);
+	Delay.msDelay(5000);
 	
- }
-
+ 	}
  }

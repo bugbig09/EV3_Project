@@ -1,4 +1,3 @@
-import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.*;
 import lejos.hardware.port.*;
 import lejos.robotics.RegulatedMotor;
@@ -50,19 +49,12 @@ void ride(float speed, float direction, float rotation) {
 		break;
 		
 	case 1:
-		/*SpeedOutA = ((scaledSpeed*scaledRotation)/100);
+		SpeedOutA = ((scaledSpeed*scaledRotation)/100);
 		SpeedOutB = (scaledSpeed - SpeedOutA);
-		LCD.drawString("SpeedA", 0, 0);
-		LCD.drawInt(SpeedOutA, 0, 1);
-		LCD.drawString("SpeedB", 0, 2);
-		LCD.drawInt(SpeedOutB, 0, 3);
-		LCD.drawInt(scaledSpeed, 0, 4);
-		LCD.drawInt(scaledRotation, 0, 5);
-		
-		
+
 		motorA.setSpeed(SpeedOutA);
-		motorB.setSpeed(SpeedOutB);*/
-		
+		motorB.setSpeed(SpeedOutB);
+		/*
 		if (rotation <0) {
 			SpeedOutA = (scaledSpeed-((scaledSpeed*scaledRotation)/100));
 			SpeedOutB = ((scaledSpeed*scaledRotation)/100);
@@ -94,7 +86,7 @@ void ride(float speed, float direction, float rotation) {
 
 			motorA.forward();
 			motorB.forward();
-		}
+		}*/
 		
 		break;
 

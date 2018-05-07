@@ -1,31 +1,29 @@
 import lejos.utility.*;
-import lejos.hardware.lcd.*;
 import lejos.hardware.Button;
+
 
  public class Main {
 	 
 	 static drive fahren = new drive();
 	 static sensoring sensor = new sensoring();
-	 static pid pidLeft = new pid();
-	 static pid pidRight = new pid();
-	 
-	 static boolean WhiteSet = false;
-	 static boolean BlackSet = false;
 	
 public static void main (String args[]){
-		int Offset = (int) sensor.setOffsetBW();
-		System.out.println(Offset);
-		Button.ENTER.waitForPress();
-	
-	while (Button.ESCAPE.isUp()) {
-		float[] RGB = sensor.readRGB();
-		
-		
-
-			System.out.println(pidLeft.PID(1000, 100, 10000, Offset, (Math.round((RGB[0]+RGB[1]+RGB[2])*1000)/3)));
-			Delay.msDelay(500);
-		}
+	 MiniPID pid = new MiniPID(1.0, 0.2, 0.5);
+	 pid.setOutputLimits(1);
+	 Button.LEDPattern(1);
+	 float offset = sensor.setOffset();
+	 Button.LEDPattern(2);
+	 
+	 while (Button.ESCAPE.isUp()) {
+		pid.setSetpoint(offset);
+		float pidOut = (float) pid.getOutput(sensor.readRedMode());
+		System.out.println(pidOut);
+		System.out.println(" ");
+		//fahren.drive(pidOut, 200);
+		fahren.ride(100, pidOut);
+		Delay.msDelay(50);
 	}
+}
 
 	
 	/*fahren.ride(100, 1, 0);

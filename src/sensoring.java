@@ -2,35 +2,45 @@ import lejos.hardware.sensor.*;
 import lejos.hardware.Button;
 import lejos.hardware.port.*;
 import lejos.robotics.SampleProvider;
+import lejos.robotics.filter.*;
+import lejos.utility.Delay;
 
 public class sensoring {
 	
-	SensorModes colorSensor = new EV3ColorSensor(SensorPort.S1);
+	EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S1);
 	
 	float[] readRGB() {
-		SampleProvider colorRGBSensor = colorSensor.getMode("RGB");
+		SampleProvider colorRGBSensor = new MeanFilter(colorSensor.getMode("RGB"), 10);
 		int sampleSize = colorRGBSensor.sampleSize();
 		float[] colorSample = new float[sampleSize];
-		
 		colorRGBSensor.fetchSample(colorSample, 0);
+		
 	return colorSample;
 	}
 	
-	float setOffsetBW() {
-		float[] RGB;
+	
+	float readRedMode() {
+		SampleProvider redSensor = new MeanFilter(colorSensor.getRedMode(), 5);
+		int sampleSize = colorSensor.sampleSize();
+		float[] redSample = new float[sampleSize];
+		redSensor.fetchSample(redSample, 0);
 		
-		System.out.println("Weiß festlegen");
+	return redSample[0];
+	}
+	
+	float setOffset() {
+		System.out.println("Weiss setzen");
 		Button.ENTER.waitForPress();
-		RGB = readRGB();
-		float White = (Math.round(((RGB[0]+RGB[1]+RGB[2])*1000)/3));
-		System.out.println("Gesetzt auf " + White);
+		float white = readRedMode();
+		System.out.println("Weiss ist auf" + white + "gesetzt");
+		System.out.println("Schwarz setzen");
 		Button.ENTER.waitForPress();
-		System.out.println("Schwarz festlegen");
+		float black = readRedMode();
+		System.out.println("Schwarz ist auf" + black + "gesetzt");
+		float offset = (white+black)/2;
+		System.out.println("Offset ist auf" + offset + "gesetzt");
 		Button.ENTER.waitForPress();
-		RGB = readRGB();
-		float Black = (Math.round(((RGB[0]+RGB[1]+RGB[2])*1000)/3));
-		System.out.println("Gesetzt auf " + Black);
-		Button.ENTER.waitForPress();
-		return((White+Black)/2);
+		
+	return offset;
 	}
 }

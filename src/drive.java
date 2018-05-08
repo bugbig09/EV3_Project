@@ -22,7 +22,14 @@ public void setAcc(int acc) {
 	motorA.setAcceleration(acc);
 	motorB.setAcceleration(acc);
 }
-	
+
+public void ride(float direction, float speed) {
+	float scaledDirection = extras.scale(1, -1, speed, -speed, direction);
+	motorA.setSpeed((int) (speed - scaledDirection));
+	motorB.setSpeed((int) (speed + scaledDirection));
+	motorA.forward();
+	motorB.forward();
+}
 	
 public void drive(float direction, float speed) {
 	float speedA;

@@ -6,34 +6,38 @@ import lejos.hardware.Button;
 	 
 	 static drive fahren = new drive();
 	 static sensoring sensor = new sensoring();
+	 static boolean stop = false;
 	
 public static void main (String args[]){
-	 MiniPID pid = new MiniPID(1.0, 0.15, 0.3);
-	 //MiniPID pid = new MiniPID(1.5, 0.2, 0.5);
-	 pid.setOutputLimits(1);
-	 Button.LEDPattern(1);
-	 //float offset = sensor.setOffset();
-	 Button.LEDPattern(2);
 	 
-	 while (Button.ESCAPE.isUp()) {
-		pid.setSetpoint(0.445);
+	MiniPID pid = new MiniPID(1.2, 0.001, 0.3);
+	//MiniPID pid = new MiniPID(1.0, 0.0001, 1.2);
+	pid.setOutputLimits(1);
+
+	 
+	Button.LEDPattern(1);
+	//float offset = sensor.setOffset();
+	pid.setSetpoint(0.505);
+	Button.LEDPattern(2);
+	
+	
+	while (Button.ESCAPE.isUp() & stop == false) {
 		
+		/*System.out.println(sensor.readColorID());
+		if (sensor.readColorID() == 13) {
+			//stop = true;
+		}*/
+		 
 		float sensorValue = sensor.readRedMode();
-		
 		float pidOut = (float) pid.getOutput(sensorValue);
-		System.out.println(pidOut);
+		
+		//System.out.println(pidOut);
 		System.out.println(" ");
 		
-		fahren.drive(pidOut, 200);
+		fahren.ride(pidOut, 100);
 		
-		Delay.msDelay(50);
+		Delay.msDelay(50); 
 	}
+	fahren.stop();
 }
-	
-	/*fahren.ride(100, 1, 0);
-	Delay.msDelay(2000);
-	fahren.ride(100, 1, -10);
-	Delay.msDelay(5000);
-	fahren.ride(100, 1, 5);
-	Delay.msDelay(5000); */
- }
+}

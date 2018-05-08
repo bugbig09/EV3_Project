@@ -9,6 +9,14 @@ public class sensoring {
 	
 	EV3ColorSensor colorSensor = new EV3ColorSensor(SensorPort.S1);
 	
+	float readColorID() {
+		SampleProvider color = colorSensor.getColorIDMode();
+		int sampleSize = color.sampleSize();
+		float[] colorID = new float[sampleSize];
+		color.fetchSample(colorID, 0);
+	return colorID[0];
+	}
+	
 	float[] readRGB() {
 		SampleProvider colorRGBSensor = new MeanFilter(colorSensor.getMode("RGB"), 10);
 		int sampleSize = colorRGBSensor.sampleSize();

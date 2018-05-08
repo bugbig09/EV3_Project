@@ -1,4 +1,5 @@
 import lejos.utility.*;
+import cx.ath.matthew.debug.Debug;
 import lejos.hardware.Button;
 
 
@@ -10,21 +11,26 @@ import lejos.hardware.Button;
 	
 public static void main (String args[]){
 	 
-	MiniPID pid = new MiniPID(1.2, 0.001, 0.3);
+	MiniPID pid = new MiniPID(0.65, 0.08, 1.0);
 	//MiniPID pid = new MiniPID(1.0, 0.0001, 1.2);
 	pid.setOutputLimits(1);
 
 	 
 	Button.LEDPattern(1);
 	//float offset = sensor.setOffset();
-	pid.setSetpoint(0.505);
+	pid.setSetpoint(0.45);
 	Button.LEDPattern(2);
 	
 	
 	while (Button.ESCAPE.isUp() & stop == false) {
 		
-		/*System.out.println(sensor.readColorID());
-		if (sensor.readColorID() == 13) {
+		/*float[] rgb = sensor.readRGB();
+		Debug.debugout.println("R " + (rgb[0]*255) + " G " + (rgb[1]*255) + " B " + (rgb[2]*255));
+		Debug.debugout.println(" ");
+		
+		Delay.msDelay(10);
+		
+		if ((rgb[1]*255) > 61 ) {
 			//stop = true;
 		}*/
 		 
@@ -32,11 +38,13 @@ public static void main (String args[]){
 		float pidOut = (float) pid.getOutput(sensorValue);
 		
 		//System.out.println(pidOut);
-		System.out.println(" ");
+		//Debug.debugout.println(pidOut);
+		//Debug.debugout.println(" ");
+		//System.out.println(" ");
 		
-		fahren.ride(pidOut, 100);
+		fahren.drive(pidOut, 200);
 		
-		Delay.msDelay(50); 
+		Delay.msDelay(10); 
 	}
 	fahren.stop();
 }

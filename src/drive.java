@@ -54,7 +54,7 @@ public void drive(float direction, float speed) {
 	
 		if (direction > 0) {
 			
-			if (direction < 0.3f) {
+			if (direction < 0.2f) {
 				
 				helpA = (1 - (2f*direction));
 				speedA = speed * helpA;
@@ -65,14 +65,14 @@ public void drive(float direction, float speed) {
 				
 			}
 			
-			if (direction == 0.3f) {
+			if (direction == 0.2f) {
 			//System.out.println("R stillstand");
 				motorA.stop();
 			}
 			
-			if (direction > 0.3f) {
+			if (direction > 0.2f) {
 				
-				helpA = ((2)*(direction - 0.3f));
+				helpA = ((2)*(direction - 0.2f));
 				speedA = speed * helpA;
 				//System.out.println("R back " + speedA);
 				motorA.backward();
@@ -92,7 +92,7 @@ public void drive(float direction, float speed) {
 		//Motor B (Links) Steuerung
 		if (direction < 0) {
 			
-			if (direction > -0.3f) {
+			if (direction > -0.2f) {
 				
 				helpB = (1 - (-2f*direction));
 				speedB = speed * helpB;
@@ -102,14 +102,14 @@ public void drive(float direction, float speed) {
 				
 			}
 			
-			if (direction == 0.3f) {
+			if (direction == 0.2f) {
 			//System.out.println("L stillstand");
 				motorB.stop();
 			}
 			
-			if (direction < -0.3f) {
+			if (direction < -0.2f) {
 				
-				helpB = (-2*(direction + 0.3f));
+				helpB = (-2*(direction + 0.2f));
 				speedB = speed * helpB;
 				//System.out.println("L Back " + speedB);
 				motorB.backward();

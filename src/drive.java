@@ -12,15 +12,23 @@ public class drive {
 
 	RegulatedMotor motorA = new EV3LargeRegulatedMotor(MotorPort.A);
 	RegulatedMotor motorB = new EV3LargeRegulatedMotor(MotorPort.B);
+	RegulatedMotor motorC = new EV3MediumRegulatedMotor(MotorPort.C);
 
 public void stop() {
 	motorA.stop();
 	motorB.stop();
 }
 	
-public void setAcc(int acc) {
-	motorA.setAcceleration(acc);
-	motorB.setAcceleration(acc);
+public void UltraRotation () {
+	if (motorC.getTachoCount() == 0) {
+		motorC.rotateTo(-90);
+	}
+	else if (motorC.getTachoCount() == -90) {
+		motorC.rotateTo(90);
+	}
+	else if (motorC.getTachoCount() == 90) {
+		motorC.rotateTo(-90);
+	}
 }
 
 public void ride(float direction, float speed) {

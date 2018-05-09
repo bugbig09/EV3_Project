@@ -6,6 +6,7 @@ import lejos.hardware.Button;
  public class Main {
 	 
 	 static drive fahren = new drive();
+	 static drive test = new drive();
 	 static sensoring sensor = new sensoring();
 	 static boolean stop = false;
 	
@@ -20,6 +21,8 @@ public static void main (String args[]){
 	//float offset = sensor.setOffset();
 	pid.setSetpoint(0.45);
 	Button.LEDPattern(2);
+	
+	test.UltraRotation();
 	
 	
 	while (Button.ESCAPE.isUp() & stop == false) {
@@ -44,7 +47,7 @@ public static void main (String args[]){
 		
 		fahren.drive(pidOut, 200);
 		
-		Delay.msDelay(10); 
+		Delay.msDelay(20); 
 	}
 	fahren.stop();
 }

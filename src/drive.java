@@ -30,14 +30,6 @@ public void UltraRotation () {
 		motorC.rotateTo(-90);
 	}
 }
-
-public void ride(float direction, float speed) {
-	float scaledDirection = extras.scale(1, -1, speed, -speed, direction);
-	motorA.setSpeed((int) (speed - scaledDirection));
-	motorB.setSpeed((int) (speed + scaledDirection));
-	motorA.forward();
-	motorB.forward();
-}
 	
 public void drive(float direction, float speed) {
 	float speedA;
@@ -45,9 +37,6 @@ public void drive(float direction, float speed) {
 	float helpA;
 	float helpB;
 
-	
-	//System.out.println(direction);
-	//System.out.println(speed);
 	//Motor A (Rechts) Steuerung
 	
 	if (direction > 1) {
@@ -66,15 +55,14 @@ public void drive(float direction, float speed) {
 				
 				helpA = (1 - (2f*direction));
 				speedA = speed * helpA;
-				//System.out.println("helpA " + helpA);
-				//System.out.println("R slow " + speedA);
+
 				motorA.forward();
 				motorA.setSpeed((int) speedA);
 				
 			}
 			
 			if (direction == 0.2f) {
-			//System.out.println("R stillstand");
+
 				motorA.stop();
 			}
 			
@@ -82,7 +70,7 @@ public void drive(float direction, float speed) {
 				
 				helpA = ((2)*(direction - 0.2f));
 				speedA = speed * helpA;
-				//System.out.println("R back " + speedA);
+
 				motorA.backward();
 				motorA.setSpeed((int) speedA);		
 			
@@ -91,7 +79,7 @@ public void drive(float direction, float speed) {
 		else {
 			
 			speedA = speed;	
-			//System.out.println("straight A " + speedA);
+
 			motorA.forward();
 			motorA.setSpeed((int) speedA);
 			
@@ -104,14 +92,14 @@ public void drive(float direction, float speed) {
 				
 				helpB = (1 - (-2f*direction));
 				speedB = speed * helpB;
-				//System.out.println("L slow " + speedB);
+
 				motorB.forward();
 				motorB.setSpeed((int) speedB);
 				
 			}
 			
 			if (direction == 0.2f) {
-			//System.out.println("L stillstand");
+
 				motorB.stop();
 			}
 			
@@ -119,7 +107,7 @@ public void drive(float direction, float speed) {
 				
 				helpB = (-2*(direction + 0.2f));
 				speedB = speed * helpB;
-				//System.out.println("L Back " + speedB);
+
 				motorB.backward();
 				motorB.setSpeed((int) speedB);		
 			}
@@ -128,7 +116,7 @@ public void drive(float direction, float speed) {
 		else {
 			
 			speedB = speed;	
-			//System.out.println("straigt B " + speedB);
+
 			motorB.forward();
 			motorB.setSpeed((int) speedB);	
 		}

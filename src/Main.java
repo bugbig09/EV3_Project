@@ -1,12 +1,10 @@
 import lejos.utility.*;
-import cx.ath.matthew.debug.Debug;
 import lejos.hardware.Button;
 
 
  public class Main {
 	 
 	 static drive fahren = new drive();
-	 static drive test = new drive();
 	 static sensoring sensor = new sensoring();
 	 static boolean stop = false;
 	
@@ -18,11 +16,9 @@ public static void main (String args[]){
 
 	 
 	Button.LEDPattern(1);
-	//float offset = sensor.setOffset();
-	pid.setSetpoint(0.45);
+	float offset = sensor.setOffset();
+	pid.setSetpoint(offset);
 	Button.LEDPattern(2);
-	
-	test.UltraRotation();
 	
 	
 	while (Button.ESCAPE.isUp() & stop == false) {
@@ -39,11 +35,6 @@ public static void main (String args[]){
 		 
 		float sensorValue = sensor.readRedMode();
 		float pidOut = (float) pid.getOutput(sensorValue);
-		
-		//System.out.println(pidOut);
-		//Debug.debugout.println(pidOut);
-		//Debug.debugout.println(" ");
-		//System.out.println(" ");
 		
 		fahren.drive(pidOut, 200);
 		
